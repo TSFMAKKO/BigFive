@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import "./App.css";
 import StartTestPage from "./pages/StartTestPage.jsx";
 import TestPage from "./pages/TestPage.jsx";
 import ResultPage from "./pages/ResultPage.jsx";
