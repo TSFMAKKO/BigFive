@@ -10,8 +10,14 @@ export default function Neuroticism() {
   const score = traits.reduce((sum, value) => sum + value, 0);
 
   const resData = result?.resData || {};
+  const degree = resData?.degree || {};
+  const highThreshold = degree.high ?? 7;
+  const lowThreshold = degree.low ?? 5;
 
-  const level = score > 7 ? "high" : score < 5 ? "low" : "middle";
+  let level = "middle";
+  if (score >= highThreshold) level = "high";
+  else if (score <= lowThreshold) level = "low";
+
   const levelStr = level === "high" ? "高" : level === "low" ? "低" : "中";
 
   //  problemList neuroticism description
@@ -50,7 +56,7 @@ export default function Neuroticism() {
     <section className="space-y-2">
       <h2 className="text-xl font-semibold">{zhWord}</h2>
       <h3>{currentRouteName}</h3>
-      <p>原始分數：{levelStr}</p>
+      <p>原始分數：{levelStr} {score}</p>
       <p>{desc}</p>
       <p>{levelDesc}</p>
       {isLast ? (
