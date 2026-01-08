@@ -1,49 +1,36 @@
-import { useState } from "react";
 import { Link, useOutletContext, useLocation } from "react-router-dom";
 
 export default function Neuroticism() {
   const result = useOutletContext();
   const location = useLocation();
   // 取得目前路由名稱 (例如: neuroticism)
-  const currentRouteName = location.pathname.split("/").pop();
-  // console.log("currentRouteName:", currentRouteName);
+  const currentRouteName = location.pathname.split("/").pop() ?? "neuroticism";
 
-  const neuroticism = result?.neuroticism ?? [];
-  const score = neuroticism.reduce((a, b) => a + b, 0); // Added initial value 0 for safety
+  const traits = result?.[currentRouteName] ?? [];
+  const score = traits.reduce((sum, value) => sum + value, 0);
 
-  // Get resData from context
   const resData = result?.resData || {};
 
-  let level = "";
-  let levelStr = "";
-  if (score > 7) {
-    level = "high";
-    levelStr = "高";
-  } else if (score < 5) {
-    level = "low";
-    levelStr = "低";
-  } else {
-    level = "middle";
-    levelStr = "中";
-  }
-
-  console.log("level:", level);
-  // console.log("resData:", resData);
+  const level = score > 7 ? "high" : score < 5 ? "low" : "middle";
+  const levelStr = level === "high" ? "高" : level === "low" ? "低" : "中";
 
   //  problemList neuroticism description
-  const descData = resData?.problemList?.[currentRouteName]?.description;
-  console.log("descData:", descData);
-  const desc = descData["desc"];
-  console.log("desc", desc);
-
-  const levelDesc = descData[level];
-  console.log("levelDesc:", levelDesc);
+  const descData =
+    resData?.problemList?.[currentRouteName]?.description || {};
+  const desc = descData.desc || "";
+  const levelDesc = descData[level] || "";
 
   // traits en zh 抓index
-  // const enIdx = resData.traits.en.indexOf(currentRouteName);
-  // console.log("enIdx:", enIdx);
+  const enIdx = resData?.traits?.en?.indexOf(currentRouteName) ?? 0;
+  const zhWord = resData?.traits?.zh?.[enIdx] || "情緒不穩定性";
 
-  const titles = ["情緒不穩定性", "外向性", "經驗開放性", "親和性", "盡責性"];
+  const titles = [
+    "情緒不穩定性",
+    "外向性",
+    "經驗開放性",
+    "親和性",
+    "盡責性",
+  ];
   const titleEns = [
     "neuroticism",
     "extroversion",
@@ -51,32 +38,31 @@ export default function Neuroticism() {
     "agreeableness",
     "conscientiousness",
   ];
-  let [titleIdx, setTitleIdx] = useState(titleEns.indexOf(currentRouteName));
-  const zhWord = resData.traits.zh[titleIdx];
-  console.log("zhWord:", zhWord);
-  // setTitleIdx(titleIdx + 1);
+  const currentIdx = titleEns.indexOf(currentRouteName);
+  // 找不到idx=0
+  const safeIdx = currentIdx === -1 ? 0 : currentIdx;
+  const isLast = safeIdx === titleEns.length - 1;
+  const nextIdx = (safeIdx + 1) % titleEns.length;
+  const nextTitle = titles[nextIdx];
+  const nextRoute = titleEns[nextIdx];
 
   return (
     <section className="space-y-2">
-      <h2 className="text-xl font-semibold">{titles[titleIdx]}</h2>
+      <h2 className="text-xl font-semibold">{zhWord}</h2>
       <h3>{currentRouteName}</h3>
       <p>原始分數：{levelStr}</p>
       <p>{desc}</p>
       <p>{levelDesc}</p>
-      {titleIdx === titleEns.length - 1 ? (
-        <Link
-          className="px-3 py-1 rounded hover:bg-gray-100"
-          to={`/test`}
-        >
+      {isLast ? (
+        <Link className="px-3 py-1 rounded hover:bg-gray-100" to="/test">
           重新測驗
         </Link>
       ) : (
         <Link
           className="px-3 py-1 rounded hover:bg-gray-100"
-          to={`/result/${titleEns[titleIdx]}`}
-          onClick={() => setTitleIdx(titleIdx + 1)}
+          to={`/result/${nextRoute}`}
         >
-          {titles[titleIdx + 1]}
+          {nextTitle}
         </Link>
       )}
     </section>
