@@ -59,7 +59,7 @@ export default function TestPage({ resData, setResult }) {
     return out;
   }, [answers, resData]);
 
-
+  const [canNext, setCanNext] = useState(false);
 
   useEffect(() => {
     console.log("questions:", questions);
@@ -121,15 +121,17 @@ export default function TestPage({ resData, setResult }) {
                             currentPage.question
                           ] === score
                         }
-                        onChange={() =>
+                        onChange={() => {
                           setAnswers((prev) => ({
                             ...prev,
                             [currentPage.trait]: {
                               ...prev[currentPage.trait],
                               [currentPage.question]: score,
                             },
-                          }))
-                        }
+                          }));
+
+                          setCanNext(true);
+                        }}
                       />
                       <label htmlFor={id}>
                         {optionText} {score}
@@ -144,20 +146,21 @@ export default function TestPage({ resData, setResult }) {
         )}
 
         <div className="flex gap-2">
-          {pageIdx < pages.length - 1 && (
+          {pageIdx < pages.length - 1 && canNext && (
             <button
               type="button"
               className="px-3 py-1 rounded border"
               disabled={pageIdx >= pages.length - 1}
-              onClick={() =>
-                setPageIdx((idx) => Math.min(pages.length - 1, idx + 1))
-              }
+              onClick={() => {
+                setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
+                setCanNext(false);
+              }}
             >
               下一題
             </button>
           )}
         </div>
-        {pageIdx === pages.length - 1 && (
+        {pageIdx === pages.length - 1 && canNext && (
           <div>
             <Link to="/result/neuroticism">計算結果</Link>
           </div>
