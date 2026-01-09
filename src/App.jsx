@@ -32,7 +32,7 @@ function App() {
   return (
     <Routes>
       <Route path="/start-test" element={<StartTestPage />} />
-      <Route path="/test" element={<TestPage />} />
+      <Route path="/test" element={<TestPage resData={resData} />} />
       <Route path="/result" element={<ResultPage resData={resData} />}>
         <Route index element={<Navigate to="openness" replace />} />
         <Route path="openness" element={<Neuroticism />} />
