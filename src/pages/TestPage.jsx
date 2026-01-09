@@ -96,76 +96,103 @@ export default function TestPage({ resData, setResult }) {
   }, [answers, resData, setResult]);
 
   return (
-    <div className="">
-      <div className="">
-        <h1 className="">測驗進行中</h1>
-
-        {currentPage && (
-          <div key={`${currentPage.trait}-${currentPage.question}`}>
-            <h2>{currentPage.trait}</h2>
+    <>
+      {currentPage && (
+        <div className="max-w-[1920px] max-h-[1080px] h-[100vh] flex">
+          <div className="flex-1 bg-[#f1f2ff]">
             <div>
-              <h4>{currentPage.question}</h4>
-              {Object.entries(currentPage.options).map(
-                ([optionText, score]) => {
-                  const id = `${currentPage.trait}-${currentPage.question}-${score}`;
-
-                  return (
-                    <p key={id}>
-                      <input
-                        type="radio"
-                        id={id}
-                        name={`${currentPage.trait}-${currentPage.question}`}
-                        value={score}
-                        checked={
-                          answers?.[currentPage.trait]?.[
-                            currentPage.question
-                          ] === score
-                        }
-                        onChange={() => {
-                          setAnswers((prev) => ({
-                            ...prev,
-                            [currentPage.trait]: {
-                              ...prev[currentPage.trait],
-                              [currentPage.question]: score,
-                            },
-                          }));
-
-                          setCanNext(true);
-                        }}
-                      />
-                      <label htmlFor={id}>
-                        {optionText} {score}
-                      </label>
-                    </p>
-                  );
-                }
+              {pageIdx > 0 && (
+                <button
+                  type="button"
+                  className="px-3 py-1 rounded border"
+                  onClick={() => {
+                    const prevIdx = Math.max(0, pageIdx - 1);
+                    const prevPage = pages[prevIdx];
+                    const answered =
+                      typeof answers?.[prevPage.trait]?.[prevPage.question] ===
+                      "number";
+                    setPageIdx(prevIdx);
+                    setCanNext(answered);
+                  }}
+                >
+                  上
+                </button>
               )}
             </div>
-            <hr />
-          </div>
-        )}
+            <div className="text-[120px]">Q</div>
 
-        <div className="flex gap-2">
-          {pageIdx < pages.length - 1 && canNext && (
-            <button
-              type="button"
-              className="px-3 py-1 rounded border"
-              disabled={pageIdx >= pages.length - 1}
-              onClick={() => {
-                setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
-                setCanNext(false);
-              }}
-            >
-              下一題
-            </button>
-          )}
-        </div>
-        {pageIdx === pages.length - 1 && canNext && (
-          <div>
-            <Link to="/result/neuroticism">計算結果</Link>
+            <div key={`${currentPage.trait}-${currentPage.question}`}>
+              <div>
+                <h4>{currentPage.question}</h4>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+
+          {/* right */}
+          <div className="flex-1 bg-[#ffffff]">
+            <div key={`${currentPage.trait}-${currentPage.question}`}>
+              <div>
+                {Object.entries(currentPage.options).map(
+                  ([optionText, score]) => {
+                    const id = `${currentPage.trait}-${currentPage.question}-${score}`;
+
+                    return (
+                      <p key={id}>
+                        <input
+                          type="radio"
+                          id={id}
+                          name={`${currentPage.trait}-${currentPage.question}`}
+                          value={score}
+                          checked={
+                            answers?.[currentPage.trait]?.[
+                              currentPage.question
+                            ] === score
+                          }
+                          onChange={() => {
+                            setAnswers((prev) => ({
+                              ...prev,
+                              [currentPage.trait]: {
+                                ...prev[currentPage.trait],
+                                [currentPage.question]: score,
+                              },
+                            }));
+
+                            setCanNext(true);
+                          }}
+                        />
+                        <label htmlFor={id}>
+                          {optionText} {score}
+                        </label>
+                      </p>
+                    );
+                  }
+                )}
+              </div>
+
+              <div className="flex gap-2">
+                {pageIdx < pages.length - 1 && canNext && (
+                  <button
+                    type="button"
+                    className="px-3 py-1 rounded border"
+                    disabled={pageIdx >= pages.length - 1}
+                    onClick={() => {
+                      setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
+                      setCanNext(false);
+                    }}
+                  >
+                    下一題
+                  </button>
+                )}
+              </div>
+              {pageIdx === pages.length - 1 && canNext && (
+                <div>
+                  <Link to="/result/neuroticism">計算結果</Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
