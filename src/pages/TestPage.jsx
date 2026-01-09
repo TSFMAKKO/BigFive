@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function TestPage({ resData }) {
+export default function TestPage({ resData, setResult }) {
   const questions = useMemo(() => {
     const problemList = resData?.problemList ?? {};
     return Object.entries(problemList).reduce((acc, [traitKey, traitData]) => {
@@ -74,15 +74,31 @@ export default function TestPage({ resData }) {
     }
   }, [pages.length, pageIdx]);
 
+  useEffect(() => {
+    // 將作答轉成結果陣列並上傳到 App 的 result
+    const problemList = resData?.problemList ?? {};
+    const order = [
+      "neuroticism",
+      "extroversion",
+      "openness",
+      "agreeableness",
+      "conscientiousness",
+    ];
+    const out = {};
+    order.forEach((trait) => {
+      const probs = problemList[trait]?.problems ?? [];
+      out[trait] = probs.map((p) => {
+        const val = answers?.[trait]?.[p.problem];
+        return typeof val === "number" ? val : 0;
+      });
+    });
+    setResult(out);
+  }, [answers, resData, setResult]);
+
   return (
     <div className="">
       <div className="">
         <h1 className="">測驗進行中</h1>
-        <pre className="bg-gray-100 p-4 rounded text-xs whitespace-pre-wrap">
-          {Object.keys(questions).length
-            ? JSON.stringify(questions, null, 2)
-            : "題目載入中..."}
-        </pre>
 
         {currentPage && (
           <div key={`${currentPage.trait}-${currentPage.question}`}>
