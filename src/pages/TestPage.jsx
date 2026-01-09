@@ -39,11 +39,34 @@ export default function TestPage({ resData }) {
   const currentPage = pages[pageIdx];
   const pageName = currentPage?.question ?? "";
 
+  const result = useMemo(() => {
+    const problemList = resData?.problemList ?? {};
+    const order = [
+      "neuroticism",
+      "extroversion",
+      "openness",
+      "agreeableness",
+      "conscientiousness",
+    ];
+    const out = {};
+    order.forEach((trait) => {
+      const probs = problemList[trait]?.problems ?? [];
+      out[trait] = probs.map((p) => {
+        const val = answers?.[trait]?.[p.problem];
+        return typeof val === "number" ? val : 0;
+      });
+    });
+    return out;
+  }, [answers, resData]);
+
+
+
   useEffect(() => {
     console.log("questions:", questions);
     console.log("answers:", answers);
     console.log("pages", pages);
-  }, [questions, answers, pages]);
+    console.log("result", result);
+  }, [questions, answers, pages, result]);
 
   useEffect(() => {
     if (pageIdx >= pages.length) {
