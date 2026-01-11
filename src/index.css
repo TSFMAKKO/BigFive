@@ -20,8 +20,10 @@ body {
 
 .bf-radio + .bf-radio__label {
     position: relative;
-    display: inline-block;
-    padding-left: 40px; /* space for custom circle */
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding-left: 76px; /* 48px circle + 2*6px border + 16px gap */
     cursor: pointer;
 }
 
@@ -31,22 +33,22 @@ body {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
+    width: 48px;
+    height: 48px;
     box-sizing: border-box;
     border-radius: 9999px;
-    border: 2px solid #C8CDD7;
+    border: 6px solid #000000; /* thicker outer ring, unselected = black */
     background: #fff;
 }
 
 .bf-radio + .bf-radio__label::after {
     content: "";
     position: absolute;
-    left: 7px; /* (28-14)/2 */
+    left: 12px; /* (48-24)/2 */
     top: 50%;
     transform: translateY(-50%) scale(0);
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
     border-radius: 9999px;
     background: #4F61FF; /* active dot color */
     transition: transform 150ms ease-in-out;
@@ -54,6 +56,7 @@ body {
 
 .bf-radio:checked + .bf-radio__label::before {
     border-color: #4F61FF;
+    border-width: 6px; /* keep thick when checked */
     box-shadow: 0 0 0 3px rgba(79, 97, 255, 0.25);
 }
 
