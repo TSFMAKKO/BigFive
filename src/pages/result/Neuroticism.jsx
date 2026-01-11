@@ -100,13 +100,13 @@ export default function Neuroticism() {
           </div>
         </header>
 
-        <div className="relative h-full px-[255px] flex items-center">
-          <div className="text-white max-w-[800px] flex max-xl:flex-wrap gap-x-[96px]">
+        <div className="relative h-full max-w-[calc(1410px+160px)] px-20 mx-auto flex items-center">
+          <div className="text-white max-w-[900px] flex max-xl:flex-wrap gap-x-[96px]">
             <div>
-              <h2 className="text-[48px]  mb-2">{zhWord}</h2>
+              <h2 className="text-[48px] mb-2">{zhWord}</h2>
               <p className="text-[24px] text-gray-300  ">{currentRouteName}</p>
             </div>
-            <div className="w-[450px] mt-[12px]">
+            <div className="w-[450px] max-lg:max-w-[450px] mt-[12px]">
               <p className="text-[16px] tracking-[-0.5px]  text-gray-200">
                 {desc}
               </p>
