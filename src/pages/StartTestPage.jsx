@@ -28,8 +28,8 @@ export default function StartTestPage({ resData }) {
           </h2>
 
           {/* Description */}
-          <div className="flex items-start justify-between gap-12">
-            <p className="text-[14px] leading-[1.8] text-gray-600 max-w-[600px]">
+          <div className="flex justify-end gap-x-[30px]">
+            <p className=" text-[#00000098] max-w-[450px]">
               {resData?.description}
             </p>
 
