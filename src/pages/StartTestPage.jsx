@@ -1,10 +1,50 @@
 import { Link } from "react-router-dom";
 
-export default function StartTestPage() {
+export default function StartTestPage({ resData }) {
   return (
-    <div className="">
-      <div className="">
-        <Link to="/test">開始測驗</Link>
+    <div className="max-w-[1920px] max-h-[1080px] h-[100vh]  mx-auto flex flex-col bg-white">
+      {/* Top image section */}
+      <div className="h-[400px] overflow-hidden">
+        <img 
+          src="/imgs/開始測驗.avif" 
+          alt="開始測驗" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Content section */}
+      <div className="flex-1 flex flex-col justify-center px-[120px]">
+        <div className="max-w-[1200px]">
+          {/* Title */}
+          <h1 className="text-[56px] font-medium leading-tight mb-4">
+            五大性格特質
+          </h1>
+          <h2 className="text-[56px] font-light leading-tight mb-6">
+            心理測驗
+          </h2>
+          
+          {/* Subtitle */}
+          <p className="text-[16px] text-gray-500 mb-12">
+            Big Five personality<br />
+            traits test
+          </p>
+
+          {/* Description */}
+          <div className="flex items-start justify-between gap-12">
+            <p className="text-[14px] leading-[1.8] text-gray-600 max-w-[600px]">
+              {resData?.description}
+            </p>
+
+            {/* Start button */}
+            <Link 
+              to="/test" 
+              className="flex items-center gap-2 bg-[#4F61FF] text-white text-[20px] font-medium px-8 py-4 rounded-md hover:bg-[#3d4dd4] transition-colors"
+            >
+              <span>開始測驗</span>
+              <span className="material-icons text-[28px]">arrow_forward</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

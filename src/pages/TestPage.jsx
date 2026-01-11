@@ -98,7 +98,7 @@ export default function TestPage({ resData, setResult }) {
   return (
     <>
       {currentPage && (
-        <div className="max-w-[1920px] max-h-[1080px] max-h-[1080px] h-[100vh] flex">
+        <div className="max-w-[1920px] max-h-[1080px] mx-auto max-h-[1080px] h-[100vh] flex">
           <div className="flex-1 bg-[#f1f2ff] relative">
             <button
               type="button"
