@@ -23,7 +23,7 @@ body {
     display: inline-flex;
     align-items: center;
     min-height: 48px;
-    padding-left: 76px; /* 48px circle + 2*6px border + 16px gap */
+    padding-left:  56px; /* 48px circle + 2*6px border + 16px gap */
     cursor: pointer;
 }
 
