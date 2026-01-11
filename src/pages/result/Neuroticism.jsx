@@ -72,7 +72,7 @@ export default function Neuroticism() {
         />
 
         {/* Navigation bar overlaying image */}
-        <header className="relative z-10 text-white px-[120px] py-6">
+        <header className="relative z-10 text-white max-w-[calc(1410px+160px)] px-20 mx-auto py-6">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-[20px] font-light mb-1">
@@ -82,7 +82,7 @@ export default function Neuroticism() {
                 Big Five personality traits test
               </p>
             </div>
-            <nav className="flex gap-8">
+            <nav className="flex gap-6 max-xl:hidden">
               {navItems.map((item) => (
                 <Link
                   key={item.key}
@@ -100,50 +100,57 @@ export default function Neuroticism() {
           </div>
         </header>
 
-        <div className="relative h-full px-[120px] flex items-center">
-          <div className="text-white max-w-[800px] flex gap-x-[96px]">
+        <div className="relative h-full px-[255px] flex items-center">
+          <div className="text-white max-w-[800px] flex max-xl:flex-wrap gap-x-[96px]">
             <div>
               <h2 className="text-[48px]  mb-2">{zhWord}</h2>
-              <p className="text-[24px] text-gray-300  ">
-                {currentRouteName}
-              </p>
+              <p className="text-[24px] text-gray-300  ">{currentRouteName}</p>
             </div>
             <div className="w-[450px] mt-[12px]">
-              <p className="text-[16px] tracking-[-0.5px]  text-gray-200">{desc}</p>
+              <p className="text-[16px] tracking-[-0.5px]  text-gray-200">
+                {desc}
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Content section */}
-      <section className="bg-white px-[120px] py-[80px]">
-        <div className="max-w-[810px]">
+      <section className="bg-white px-[255px] py-[80px]">
+        <div className="max-w-[810px] text-[24px]">
           <h3 className="text-[64px] mb-4">{levelStr}</h3>
-          <p className=" text-gray-700 mb-8">
-            你的{zhWord}介於
-            {levelStr === "高"
-              ? "高分與低分"
-              : levelStr === "低"
-              ? "低分"
-              : "中間"}
-            ，可參考高分與低分的說明。
-          </p>
-
-          <div className="space-y-6 mb-12">
-            <div>
-              <h4 className="text-[20px] font-medium mb-3">高</h4>
-              <p className="text-[16px] leading-[1.8] text-gray-600">
-                {descData["high"] || "高分描述暫無資料"}
+          {levelStr === "中" ? (
+            <>
+              <p className=" text-gray-700 mb-8">
+                你的{zhWord}介於
+                {levelStr === "高"
+                  ? "高分與低分"
+                  : levelStr === "低"
+                  ? "低分"
+                  : "中間"}
+                ，可參考高分與低分的說明。
               </p>
-            </div>
-            <div>
-              <h4 className="text-[20px] font-medium mb-3">低</h4>
-              <p className="text-[16px] leading-[1.8] text-gray-600">
-                {descData["low"] || "低分描述暫無資料"}
-              </p>
-            </div>
-          </div>
 
+              <div className="space-y-6 mb-12">
+                <div>
+                  <h4 className="text-[20px] font-medium mb-3">高</h4>
+                  <p className="text-[16px] leading-[1.8] text-gray-600">
+                    {descData["high"] || "高分描述暫無資料"}
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-[20px] font-medium mb-3">低</h4>
+                  <p className="text-[16px] leading-[1.8] text-gray-600">
+                    {descData["low"] || "低分描述暫無資料"}
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <p className=" text-gray-700 mb-8 tracking-[-0.5px] ">{descData[level]}</p>
+          )}
+
+        </div>
           {/* Navigation */}
           <div className="flex justify-end">
             {isLast ? (
@@ -159,16 +166,20 @@ export default function Neuroticism() {
             ) : (
               <Link
                 to={`/result/${nextRoute}`}
-                className="flex items-center gap-2 text-[#4F61FF] text-[20px] font-medium hover:text-[#3d4dd4] transition-colors"
+                className="flex items-center gap-2 text-[32px]  hover:text-[#3d4dd4] transition-colors"
               >
-                <span>下一個：{nextTitle}</span>
-                <span className="material-icons text-[28px]">
+                <span>下一個</span>
+
+                <span className="font-medium">：{nextTitle}</span>
+                <span
+                  className="material-icons text-[#4F61FF] "
+                  style={{ fontSize: "48px" }}
+                >
                   arrow_forward
                 </span>
               </Link>
             )}
           </div>
-        </div>
       </section>
     </div>
   );
