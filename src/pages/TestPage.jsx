@@ -101,7 +101,7 @@ export default function TestPage({ resData, setResult }) {
         <div className="max-w-[1920px] max-h-[1080px] h-[100vh] flex">
           <div className="flex-1 bg-[#f1f2ff]">
             <div>
-              {pageIdx > 0 && (
+             
                 <button
                   type="button"
                   className="px-3 py-1 rounded border"
@@ -117,13 +117,12 @@ export default function TestPage({ resData, setResult }) {
                 >
                   上
                 </button>
-              )}
             </div>
-            <div className="text-[120px]">Q</div>
+            <div className="q text-[120px]">Q</div>
 
             <div key={`${currentPage.trait}-${currentPage.question}`}>
               <div>
-                <h4>{currentPage.question}</h4>
+                <h4 className="text-[48px] ">{currentPage.question}</h4>
               </div>
             </div>
           </div>
@@ -131,14 +130,15 @@ export default function TestPage({ resData, setResult }) {
           {/* right */}
           <div className="flex-1 bg-[#ffffff]">
             <div key={`${currentPage.trait}-${currentPage.question}`}>
-              <div>
+              <div className="pl-[72px] flex flex-col gap-y-[36px]">
                 {Object.entries(currentPage.options).map(
                   ([optionText, score]) => {
                     const id = `${currentPage.trait}-${currentPage.question}-${score}`;
 
                     return (
-                      <p key={id}>
+                      <p className="text-[24px] leading-[1.5] flex gap-x-[8px]" key={id}>
                         <input
+                          
                           type="radio"
                           id={id}
                           name={`${currentPage.trait}-${currentPage.question}`}
@@ -160,8 +160,8 @@ export default function TestPage({ resData, setResult }) {
                             setCanNext(true);
                           }}
                         />
-                        <label htmlFor={id}>
-                          {optionText} {score}
+                        <label className="" htmlFor={id}>
+                          {optionText}
                         </label>
                       </p>
                     );
@@ -169,7 +169,7 @@ export default function TestPage({ resData, setResult }) {
                 )}
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex">
                 {pageIdx < pages.length - 1 &&  (
                   <button
                     type="button"
