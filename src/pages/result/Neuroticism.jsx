@@ -117,7 +117,7 @@ export default function Neuroticism() {
 
       {/* Content section */}
       <section className="bg-white px-[255px] py-[80px]">
-        <div className="max-w-[810px] text-[24px]">
+        <div className="max-w-[810px] text-[24px] mb-[201px]">
           <h3 className="text-[64px] mb-4">{levelStr}</h3>
           {levelStr === "中" ? (
             <>
