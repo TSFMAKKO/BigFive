@@ -136,9 +136,9 @@ export default function TestPage({ resData, setResult }) {
                     const id = `${currentPage.trait}-${currentPage.question}-${score}`;
 
                     return (
-                      <p className="text-[24px] leading-[1.5] flex gap-x-[8px]" key={id}>
+                      <p className="text-[24px] leading-[1.5]" key={id}>
                         <input
-                          
+                          className="bf-radio"
                           type="radio"
                           id={id}
                           name={`${currentPage.trait}-${currentPage.question}`}
@@ -160,7 +160,7 @@ export default function TestPage({ resData, setResult }) {
                             setCanNext(true);
                           }}
                         />
-                        <label className="" htmlFor={id}>
+                        <label className="bf-radio__label" htmlFor={id}>
                           {optionText}
                         </label>
                       </p>

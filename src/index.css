@@ -9,3 +9,64 @@ body {
 .q{
     font-family: 'PT Sans';
 }
+
+/* Custom radio (BigFive) */
+.bf-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.bf-radio + .bf-radio__label {
+    position: relative;
+    display: inline-block;
+    padding-left: 40px; /* space for custom circle */
+    cursor: pointer;
+}
+
+.bf-radio + .bf-radio__label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    box-sizing: border-box;
+    border-radius: 9999px;
+    border: 2px solid #C8CDD7;
+    background: #fff;
+}
+
+.bf-radio + .bf-radio__label::after {
+    content: "";
+    position: absolute;
+    left: 7px; /* (28-14)/2 */
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    background: #4F61FF; /* active dot color */
+    transition: transform 150ms ease-in-out;
+}
+
+.bf-radio:checked + .bf-radio__label::before {
+    border-color: #4F61FF;
+    box-shadow: 0 0 0 3px rgba(79, 97, 255, 0.25);
+}
+
+.bf-radio:checked + .bf-radio__label::after {
+    transform: translateY(-50%) scale(1);
+}
+
+/* Selected label text turns purple */
+.bf-radio:checked + .bf-radio__label {
+    color: #4F61FF;
+}
+
+.bf-radio:focus-visible + .bf-radio__label::before {
+    outline: 2px solid #4F61FF;
+    outline-offset: 2px;
+}
