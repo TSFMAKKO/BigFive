@@ -1,1 +1,75 @@
 @import "tailwindcss";
+
+/* Global font for Traditional Chinese */
+body {
+	font-family: 'Noto Sans CJK TC', sans-serif;
+    font-weight: 300;
+}
+
+.q{
+    font-family: 'PT Sans';
+}
+
+/* Custom radio (BigFive) */
+.bf-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.bf-radio + .bf-radio__label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding-left:  56px; /* 48px circle + 2*6px border + 16px gap */
+    cursor: pointer;
+}
+
+.bf-radio + .bf-radio__label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 9999px;
+    border: 6px solid #000000; /* thicker outer ring, unselected = black */
+    background: #fff;
+}
+
+.bf-radio + .bf-radio__label::after {
+    content: "";
+    position: absolute;
+    left: 12px; /* (48-24)/2 */
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background: #4F61FF; /* active dot color */
+    transition: transform 150ms ease-in-out;
+}
+
+.bf-radio:checked + .bf-radio__label::before {
+    border-color: #4F61FF;
+    border-width: 6px; /* keep thick when checked */
+    box-shadow: 0 0 0 3px rgba(79, 97, 255, 0.25);
+}
+
+.bf-radio:checked + .bf-radio__label::after {
+    transform: translateY(-50%) scale(1);
+}
+
+/* Selected label text turns purple */
+.bf-radio:checked + .bf-radio__label {
+    color: #4F61FF;
+}
+
+.bf-radio:focus-visible + .bf-radio__label::before {
+    outline: 2px solid #4F61FF;
+    outline-offset: 2px;
+}

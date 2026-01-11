@@ -38,7 +38,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/start-test" element={<StartTestPage />} />
+      <Route path="/start-test" element={<StartTestPage resData={resData} />} />
       <Route path="/test" element={<TestPage resData={resData} setResult={setResult} />} />
       <Route path="/result" element={<ResultPage resData={resData} result={result} />}> 
         <Route index element={<Navigate to="openness" replace />} />
