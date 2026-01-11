@@ -170,11 +170,11 @@ export default function TestPage({ resData, setResult }) {
               </div>
 
               <div className="flex gap-2">
-                {pageIdx < pages.length - 1 && canNext && (
+                {pageIdx < pages.length - 1 &&  (
                   <button
                     type="button"
                     className="px-3 py-1 rounded border"
-                    disabled={pageIdx >= pages.length - 1}
+                    disabled={ !canNext}
                     onClick={() => {
                       setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
                       setCanNext(false);
@@ -183,12 +183,13 @@ export default function TestPage({ resData, setResult }) {
                     下一題
                   </button>
                 )}
-              </div>
-              {pageIdx === pages.length - 1 && canNext && (
+                {pageIdx === pages.length - 1 && canNext && (
                 <div>
                   <Link to="/result/neuroticism">計算結果</Link>
                 </div>
               )}
+              </div>
+              
             </div>
           </div>
         </div>
