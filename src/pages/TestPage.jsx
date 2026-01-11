@@ -98,29 +98,29 @@ export default function TestPage({ resData, setResult }) {
   return (
     <>
       {currentPage && (
-        <div className="max-w-[1920px] max-h-[1080px] h-[100vh] flex">
+        <div className="max-w-[1920px] max-h-[1080px] max-h-[1080px] h-[100vh] flex">
           <div className="flex-1 bg-[#f1f2ff] relative">
-            {pageIdx > 0 && (
-              <button
-                type="button"
-                aria-label="上一題"
-                className="absolute top-0 left-0 w-[64px] h-[64px] bg-[#4F61FF] text-white grid place-items-center"
-                onClick={() => {
-                  const prevIdx = Math.max(0, pageIdx - 1);
-                  const prevPage = pages[prevIdx];
-                  const answered =
-                    typeof answers?.[prevPage.trait]?.[prevPage.question] ===
-                    "number";
-                  setPageIdx(prevIdx);
-                  setCanNext(answered);
-                }}
-              >
-                <span className="material-icons text-[32px]">arrow_back</span>
-              </button>
-            )}
-            <div className="q text-[120px]">Q</div>
-
-            <div key={`${currentPage.trait}-${currentPage.question}`}>
+            <button
+              type="button"
+              aria-label="上一題"
+              className="absolute top-0 left-0 w-[64px] h-[64px] bg-[#4F61FF] text-white grid place-items-center"
+              onClick={() => {
+                const prevIdx = Math.max(0, pageIdx - 1);
+                const prevPage = pages[prevIdx];
+                const answered =
+                  typeof answers?.[prevPage.trait]?.[prevPage.question] ===
+                  "number";
+                setPageIdx(prevIdx);
+                setCanNext(answered);
+              }}
+            >
+              <span className="material-icons text-[32px]">arrow_back</span>
+            </button>
+            <div className="q text-[120px] mt-[240px] ml-[96px]">Q</div>
+            <div
+              className="mt-[16px] ml-[144px]"
+              key={`${currentPage.trait}-${currentPage.question}`}
+            >
               <div>
                 <h4 className="text-[48px] ">{currentPage.question}</h4>
               </div>
@@ -129,8 +129,8 @@ export default function TestPage({ resData, setResult }) {
 
           {/* right */}
           <div className="flex-1 bg-[#ffffff] relative">
-            <div key={`${currentPage.trait}-${currentPage.question}`}>
-              <div className="pl-[72px] pr-[24px] pb-[120px] flex flex-col gap-y-[36px]">
+            <div className="" key={`${currentPage.trait}-${currentPage.question}`}>
+              <div className="pl-[72px] pr-[24px] pb-[120px] mt-[510px] flex flex-col gap-y-[36px]">
                 {Object.entries(currentPage.options).map(
                   ([optionText, score]) => {
                     const id = `${currentPage.trait}-${currentPage.question}-${score}`;
@@ -187,17 +187,21 @@ export default function TestPage({ resData, setResult }) {
                     }}
                   >
                     <span>下一題</span>
-                    <span className="material-icons text-[28px]">arrow_forward</span>
+                    <span className="material-icons text-[28px]">
+                      arrow_forward
+                    </span>
                   </button>
                 )}
-                {pageIdx === pages.length - 1 && (
-                  canNext ? (
+                {pageIdx === pages.length - 1 &&
+                  (canNext ? (
                     <Link
                       to="/result/neuroticism"
                       className="flex items-center gap-2 text-white text-[20px] font-medium"
                     >
                       <span>計算結果</span>
-                      <span className="material-icons text-[28px]">arrow_forward</span>
+                      <span className="material-icons text-[28px]">
+                        arrow_forward
+                      </span>
                     </Link>
                   ) : (
                     <button
@@ -206,12 +210,12 @@ export default function TestPage({ resData, setResult }) {
                       className="flex items-center gap-2 text-white text-[20px] font-medium opacity-70 cursor-not-allowed"
                     >
                       <span>計算結果</span>
-                      <span className="material-icons text-[28px]">arrow_forward</span>
+                      <span className="material-icons text-[28px]">
+                        arrow_forward
+                      </span>
                     </button>
-                  )
-                )}
+                  ))}
               </div>
-              
             </div>
           </div>
         </div>
