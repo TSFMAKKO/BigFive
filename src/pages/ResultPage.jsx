@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
-export default function ResultPage({ resData }) {
-  const result = {
-    neuroticism: [4, 5], //情緒不穩定性
-    extroversion: [3, 1], //外相性
-    openness: [2, 4], //經驗開放性
-    agreeableness: [5, 2], //親和性
-    conscientiousness: [4, 3], //盡責性
-  };
+export default function ResultPage({ resData, result }) {
 
 
 

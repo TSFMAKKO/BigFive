@@ -21,8 +21,7 @@ export default function Neuroticism() {
   const levelStr = level === "high" ? "高" : level === "low" ? "低" : "中";
 
   //  problemList neuroticism description
-  const descData =
-    resData?.problemList?.[currentRouteName]?.description || {};
+  const descData = resData?.problemList?.[currentRouteName]?.description || {};
   const desc = descData.desc || "";
   const levelDesc = descData[level] || "";
 
@@ -30,13 +29,7 @@ export default function Neuroticism() {
   const enIdx = resData?.traits?.en?.indexOf(currentRouteName) ?? 0;
   const zhWord = resData?.traits?.zh?.[enIdx] || "情緒不穩定性";
 
-  const titles = [
-    "情緒不穩定性",
-    "外向性",
-    "經驗開放性",
-    "親和性",
-    "盡責性",
-  ];
+  const titles = ["情緒不穩定性", "外向性", "經驗開放性", "親和性", "盡責性"];
   const titleEns = [
     "neuroticism",
     "extroversion",
@@ -56,9 +49,18 @@ export default function Neuroticism() {
     <section className="space-y-2">
       <h2 className="text-xl font-semibold">{zhWord}</h2>
       <h3>{currentRouteName}</h3>
-      <p>原始分數：{levelStr} {score}</p>
+      <p>
+        原始分數：{levelStr} {score}
+      </p>
       <p>{desc}</p>
       <p>{levelDesc}</p>
+
+      {levelStr === "中" && (
+        <>
+          <p>高:{descData["high"]}</p>
+          <p>低:{descData["low"]}</p>
+        </>
+      )}
       {isLast ? (
         <Link className="px-3 py-1 rounded hover:bg-gray-100" to="/test">
           重新測驗
