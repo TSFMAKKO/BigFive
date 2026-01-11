@@ -13,7 +13,7 @@ export default function StartTestPage({ resData }) {
       </div>
 
       {/* Content section */}
-      <div className="flex-1 flex flex-col justify-center px-[120px]">
+      <div className="flex-1 flex flex-col justify-center px-[255px]">
         <div className="max-w-[1200px]">
           {/* Title */}
           <h1 className="text-[56px] font-medium leading-tight mb-4">
@@ -38,10 +38,10 @@ export default function StartTestPage({ resData }) {
             {/* Start button */}
             <Link 
               to="/test" 
-              className="flex items-center gap-2 bg-[#4F61FF] text-white text-[20px] font-medium px-8 py-4 rounded-md hover:bg-[#3d4dd4] transition-colors"
+              className="flex items-center gap-2 bg-[#4F61FF] text-white text-[32px] font-medium px-[73px] py-[24px] hover:bg-[#3d4dd4] transition-colors"
             >
               <span>開始測驗</span>
-              <span className="material-icons text-[28px]">arrow_forward</span>
+              <span className="material-icons" style={{ fontSize: '48px' }}>arrow_forward</span>
             </Link>
           </div>
         </div>
