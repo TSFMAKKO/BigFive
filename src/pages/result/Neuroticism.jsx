@@ -3,7 +3,6 @@ import { Link, useOutletContext, useLocation } from "react-router-dom";
 export default function Neuroticism() {
   const result = useOutletContext();
   const location = useLocation();
-  // 取得目前路由名稱 (例如: neuroticism)
   const currentRouteName = location.pathname.split("/").pop() ?? "neuroticism";
 
   const traits = result?.[currentRouteName] ?? [];
@@ -20,12 +19,10 @@ export default function Neuroticism() {
 
   const levelStr = level === "high" ? "高" : level === "low" ? "低" : "中";
 
-  //  problemList neuroticism description
   const descData = resData?.problemList?.[currentRouteName]?.description || {};
   const desc = descData.desc || "";
   const levelDesc = descData[level] || "";
 
-  // traits en zh 抓index
   const enIdx = resData?.traits?.en?.indexOf(currentRouteName) ?? 0;
   const zhWord = resData?.traits?.zh?.[enIdx] || "情緒不穩定性";
 
@@ -38,41 +35,119 @@ export default function Neuroticism() {
     "conscientiousness",
   ];
   const currentIdx = titleEns.indexOf(currentRouteName);
-  // 找不到idx=0
   const safeIdx = currentIdx === -1 ? 0 : currentIdx;
   const isLast = safeIdx === titleEns.length - 1;
   const nextIdx = (safeIdx + 1) % titleEns.length;
   const nextTitle = titles[nextIdx];
   const nextRoute = titleEns[nextIdx];
 
-  return (
-    <section className="space-y-2">
-      <h2 className="text-xl font-semibold">{zhWord}</h2>
-      <h3>{currentRouteName}</h3>
-      <p>
-        原始分數：{levelStr} {score}
-      </p>
-      <p>{desc}</p>
-      <p>{levelDesc}</p>
+  // Image mapping
+  const imageMap = {
+    neuroticism: "情緒不穩定性.avif",
+    extroversion: "外向性.avif",
+    openness: "經驗開放性.avif",
+    agreeableness: "親和性.avif",
+    conscientiousness: "盡責性.avif",
+  };
+  const imageSrc = `/imgs/${imageMap[currentRouteName] || imageMap.neuroticism}`;
 
-      {levelStr === "中" && (
-        <>
-          <p>高:{descData["high"]}</p>
-          <p>低:{descData["low"]}</p>
-        </>
-      )}
-      {isLast ? (
-        <Link className="px-3 py-1 rounded hover:bg-gray-100" to="/test">
-          重新測驗
-        </Link>
-      ) : (
-        <Link
-          className="px-3 py-1 rounded hover:bg-gray-100"
-          to={`/result/${nextRoute}`}
-        >
-          {nextTitle}
-        </Link>
-      )}
-    </section>
+  const navItems = [
+    { key: "neuroticism", label: "情緒不穩定性" },
+    { key: "extroversion", label: "外向性" },
+    { key: "openness", label: "經驗開放性" },
+    { key: "agreeableness", label: "親和性" },
+    { key: "conscientiousness", label: "盡責性" },
+  ];
+
+  return (
+    <div>
+      {/* Hero section with image */}
+      <section className="relative h-[400px] bg-black/90 overflow-hidden">
+        <img
+          src={imageSrc}
+          alt={zhWord}
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+        />
+        
+        {/* Navigation bar overlaying image */}
+        <header className="relative z-10 text-white px-[120px] py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-[20px] font-light mb-1">五大性格特質心理測驗</h1>
+              <p className="text-[12px] text-gray-400">Big Five personality traits test</p>
+            </div>
+            <nav className="flex gap-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.key}
+                  to={`/result/${item.key}`}
+                  className={`text-[16px] pb-1 transition-colors ${
+                    currentRouteName === item.key
+                      ? "text-[#4F61FF] border-b-2 border-[#4F61FF]"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+
+        <div className="relative h-full px-[120px] flex items-center">
+          <div className="text-white max-w-[800px]">
+            <h2 className="text-[56px] font-light mb-2">{zhWord}</h2>
+            <p className="text-[20px] text-gray-300 mb-6 capitalize">{currentRouteName}</p>
+            <p className="text-[16px] leading-[1.8] text-gray-200">{desc}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Content section */}
+      <section className="bg-white px-[120px] py-[80px]">
+        <div className="max-w-[1200px]">
+          <h3 className="text-[72px] font-light mb-8">{levelStr}</h3>
+          <p className="text-[18px] leading-[1.8] text-gray-700 mb-8">
+            你的{zhWord}介於{levelStr === "高" ? "高分與低分" : levelStr === "低" ? "低分" : "中間"}，可參考高分與低分的說明。
+          </p>
+
+          <div className="space-y-6 mb-12">
+            <div>
+              <h4 className="text-[20px] font-medium mb-3">高</h4>
+              <p className="text-[16px] leading-[1.8] text-gray-600">
+                {descData["high"] || "高分描述暫無資料"}
+              </p>
+            </div>
+            <div>
+              <h4 className="text-[20px] font-medium mb-3">低</h4>
+              <p className="text-[16px] leading-[1.8] text-gray-600">
+                {descData["low"] || "低分描述暫無資料"}
+              </p>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex justify-end">
+            {isLast ? (
+              <Link
+                to="/start-test"
+                className="flex items-center gap-2 text-[#4F61FF] text-[20px] font-medium hover:text-[#3d4dd4] transition-colors"
+              >
+                <span>重新測驗</span>
+                <span className="material-icons text-[28px]">arrow_forward</span>
+              </Link>
+            ) : (
+              <Link
+                to={`/result/${nextRoute}`}
+                className="flex items-center gap-2 text-[#4F61FF] text-[20px] font-medium hover:text-[#3d4dd4] transition-colors"
+              >
+                <span>下一個：{nextTitle}</span>
+                <span className="material-icons text-[28px]">arrow_forward</span>
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
