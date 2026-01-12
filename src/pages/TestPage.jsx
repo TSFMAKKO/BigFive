@@ -177,52 +177,44 @@ export default function TestPage({ resData, setResult }) {
               </div>
 
               {/* Bottom action bar */}
-              <div
-                className={`absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] flex items-center justify-end px-6 sm:px-8 lg:pr-[48px] ${
-                  canNext ? "bg-[#4F61FF]" : "bg-[#C8CDD7]"
-                }`}
-              >
-                {pageIdx < pages.length - 1 && (
-                  <button
-                    type="button"
-                    disabled={!canNext}
-                    className="flex items-center gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium disabled:opacity-70 disabled:cursor-not-allowed"
-                    onClick={() => {
-                      if (!canNext) return;
-                      setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
-                      setCanNext(false);
-                    }}
+              {pageIdx < pages.length - 1 && (
+                <button
+                  type="button"
+                  disabled={!canNext}
+                  className={`absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] ${
+                    canNext ? "bg-[#4F61FF]" : "bg-[#C8CDD7]"
+                  } disabled:opacity-100 disabled:cursor-not-allowed`}
+                  onClick={() => {
+                    if (!canNext) return;
+                    setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
+                    setCanNext(false);
+                  }}
+                >
+                  <span>下一題</span>
+                  <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
+                    arrow_forward
+                  </span>
+                </button>
+              )}
+              {pageIdx === pages.length - 1 &&
+                (canNext ? (
+                  <Link
+                    to="/result/neuroticism"
+                    className="absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] bg-[#4F61FF]"
                   >
-                    <span>下一題</span>
+                    <span>計算結果</span>
                     <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
                       arrow_forward
                     </span>
-                  </button>
-                )}
-                {pageIdx === pages.length - 1 &&
-                  (canNext ? (
-                    <Link
-                      to="/result/neuroticism"
-                      className="flex items-center gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium"
-                    >
-                      <span>計算結果</span>
-                      <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
-                        arrow_forward
-                      </span>
-                    </Link>
-                  ) : (
-                    <button
-                      type="button"
-                      disabled
-                      className="flex items-center gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium opacity-70 cursor-not-allowed"
-                    >
-                      <span>計算結果</span>
-                      <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
-                        arrow_forward
-                      </span>
-                    </button>
-                  ))}
-              </div>
+                  </Link>
+                ) : (
+                  <div className="absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] bg-[#C8CDD7] opacity-100 cursor-not-allowed">
+                    <span>計算結果</span>
+                    <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
+                      arrow_forward
+                    </span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>

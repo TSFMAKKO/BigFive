@@ -132,7 +132,7 @@ export default function Neuroticism() {
               </p>
 
               <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
-                <div>
+                <div className="flex">
                   <h4 className="text-[18px] sm:text-[20px] font-medium mb-2 sm:mb-3">高</h4>
                   <p className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.8] text-gray-600">
                     {descData["high"] || "高分描述暫無資料"}
