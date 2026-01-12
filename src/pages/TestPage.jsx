@@ -132,10 +132,20 @@ export default function TestPage({ resData, setResult }) {
                 </h4>
               </div>
             </div>
+
+            <div className="absolute text-[#00000060] bottom-6 sm:bottom-8 lg:bottom-12 left-6 sm:left-12 lg:left-20 ">
+              <p className="font-bold text-[16px] mb-1">五大性格特質心理測驗</p>
+              <p className="text-[12px]">Big Five personality traits test</p>
+            </div>
           </div>
 
           {/* right */}
           <div className="w-full lg:w-[960px] min-h-screen bg-[#ffffff] relative">
+            {/* Progress indicator */}
+            <div className="absolute top-6 sm:top-8 lg:top-12 right-6 sm:right-12 lg:right-16 text-[14px] sm:text-[16px] lg:text-[24px] font-normal text-gray-500" style={{ fontFamily: 'PT Sans', fontStyle: 'italic' }}>
+              {pageIdx + 1}/{pages.length}
+            </div>
+            
             <div className="" key={`${currentPage.trait}-${currentPage.question}`}>
               <div className="px-6 sm:px-12 md:px-16 lg:pl-[72px] lg:pr-[24px] pb-[100px] sm:pb-[120px] pt-8 lg:pt-[510px] flex flex-col gap-y-[24px] sm:gap-y-[30px] lg:gap-y-[36px]">
                 {Object.entries(currentPage.options).map(
@@ -177,52 +187,44 @@ export default function TestPage({ resData, setResult }) {
               </div>
 
               {/* Bottom action bar */}
-              <div
-                className={`absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] flex items-center justify-end px-6 sm:px-8 lg:pr-[48px] ${
-                  canNext ? "bg-[#4F61FF]" : "bg-[#C8CDD7]"
-                }`}
-              >
-                {pageIdx < pages.length - 1 && (
-                  <button
-                    type="button"
-                    disabled={!canNext}
-                    className="flex items-center gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium disabled:opacity-70 disabled:cursor-not-allowed"
-                    onClick={() => {
-                      if (!canNext) return;
-                      setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
-                      setCanNext(false);
-                    }}
+              {pageIdx < pages.length - 1 && (
+                <button
+                  type="button"
+                  disabled={!canNext}
+                  className={`absolute cursor-pointer left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] ${
+                    canNext ? "bg-[#4F61FF]" : "bg-[#C8CDD7]"
+                  } disabled:opacity-100 disabled:cursor-not-allowed`}
+                  onClick={() => {
+                    if (!canNext) return;
+                    setPageIdx((idx) => Math.min(pages.length - 1, idx + 1));
+                    setCanNext(false);
+                  }}
+                >
+                  <span>下一題</span>
+                  <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
+                    arrow_forward
+                  </span>
+                </button>
+              )}
+              {pageIdx === pages.length - 1 &&
+                (canNext ? (
+                  <Link
+                    to="/result/neuroticism"
+                    className="absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] bg-[#4F61FF]"
                   >
-                    <span>下一題</span>
+                    <span>計算結果</span>
                     <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
                       arrow_forward
                     </span>
-                  </button>
-                )}
-                {pageIdx === pages.length - 1 &&
-                  (canNext ? (
-                    <Link
-                      to="/result/neuroticism"
-                      className="flex items-center gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium"
-                    >
-                      <span>計算結果</span>
-                      <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
-                        arrow_forward
-                      </span>
-                    </Link>
-                  ) : (
-                    <button
-                      type="button"
-                      disabled
-                      className="flex items-center gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium opacity-70 cursor-not-allowed"
-                    >
-                      <span>計算結果</span>
-                      <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
-                        arrow_forward
-                      </span>
-                    </button>
-                  ))}
-              </div>
+                  </Link>
+                ) : (
+                  <div className="absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] bg-[#C8CDD7] opacity-100 cursor-not-allowed">
+                    <span>計算結果</span>
+                    <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
+                      arrow_forward
+                    </span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
