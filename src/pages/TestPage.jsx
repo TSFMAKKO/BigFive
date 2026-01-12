@@ -178,7 +178,7 @@ export default function TestPage({ resData, setResult }) {
 
               {/* Bottom action bar */}
               <div
-                className={`absolute left-0 right-0 bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] flex items-center justify-end px-6 sm:px-8 lg:pr-[48px] ${
+                className={`absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] flex items-center justify-end px-6 sm:px-8 lg:pr-[48px] ${
                   canNext ? "bg-[#4F61FF]" : "bg-[#C8CDD7]"
                 }`}
               >
