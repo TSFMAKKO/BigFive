@@ -136,6 +136,11 @@ export default function TestPage({ resData, setResult }) {
 
           {/* right */}
           <div className="w-full lg:w-[960px] min-h-screen bg-[#ffffff] relative">
+            {/* Progress indicator */}
+            <div className="absolute top-6 sm:top-8 lg:top-12 right-6 sm:right-12 lg:right-16 text-[14px] sm:text-[16px] lg:text-[24px] font-normal text-gray-500" style={{ fontFamily: 'PT Sans', fontStyle: 'italic' }}>
+              {pageIdx + 1}/{pages.length}
+            </div>
+            
             <div className="" key={`${currentPage.trait}-${currentPage.question}`}>
               <div className="px-6 sm:px-12 md:px-16 lg:pl-[72px] lg:pr-[24px] pb-[100px] sm:pb-[120px] pt-8 lg:pt-[510px] flex flex-col gap-y-[24px] sm:gap-y-[30px] lg:gap-y-[36px]">
                 {Object.entries(currentPage.options).map(
@@ -181,7 +186,7 @@ export default function TestPage({ resData, setResult }) {
                 <button
                   type="button"
                   disabled={!canNext}
-                  className={`absolute left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] ${
+                  className={`absolute cursor-pointer left-0 right-0 lg:bottom-0 h-[60px] sm:h-[68px] lg:h-[72px] w-full flex items-center justify-end gap-2 text-white text-[16px] sm:text-[18px] lg:text-[20px] font-medium px-6 sm:px-8 lg:px-[48px] ${
                     canNext ? "bg-[#4F61FF]" : "bg-[#C8CDD7]"
                   } disabled:opacity-100 disabled:cursor-not-allowed`}
                   onClick={() => {
