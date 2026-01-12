@@ -64,7 +64,7 @@ export default function Neuroticism() {
   return (
     <div>
       {/* Hero section with image */}
-      <section className="relative h-[540px] bg-black/90 overflow-hidden">
+      <section className="relative h-[350px] sm:h-[450px] lg:h-[540px] bg-black/90 overflow-hidden">
         <img
           src={imageSrc}
           alt={zhWord}
@@ -72,22 +72,22 @@ export default function Neuroticism() {
         />
 
         {/* Navigation bar overlaying image */}
-        <header className="relative z-10 text-white max-w-[calc(1410px+160px)] px-20 mx-auto py-6">
+        <header className="relative z-10 text-white max-w-[calc(1410px+160px)] px-6 sm:px-12 lg:px-20 mx-auto py-4 sm:py-5 lg:py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-[20px] font-light mb-1">
+              <h1 className="text-[16px] sm:text-[18px] lg:text-[20px] font-light mb-1">
                 五大性格特質心理測驗
               </h1>
-              <p className="text-[12px] text-gray-400">
+              <p className="text-[10px] sm:text-[11px] lg:text-[12px] text-gray-400">
                 Big Five personality traits test
               </p>
             </div>
-            <nav className="flex gap-6 max-xl:hidden">
+            <nav className="hidden lg:flex gap-4 xl:gap-6">
               {navItems.map((item) => (
                 <Link
                   key={item.key}
                   to={`/result/${item.key}`}
-                  className={`text-[16px] pb-1 transition-colors ${
+                  className={`text-[14px] xl:text-[16px] pb-1 transition-colors ${
                     currentRouteName === item.key
                       ? "text-[#ffffff] border-b-2 border-[#4F61FF]"
                       : "text-white/70 hover:text-white"
@@ -100,14 +100,14 @@ export default function Neuroticism() {
           </div>
         </header>
 
-        <div className="relative h-full max-w-[calc(1410px+160px)] px-20 mx-auto flex items-center">
-          <div className="text-white max-w-[900px] flex max-xl:flex-wrap gap-x-[96px]">
-            <div>
-              <h2 className="text-[48px] mb-2">{zhWord}</h2>
-              <p className="text-[24px] text-gray-300  ">{currentRouteName}</p>
+        <div className="relative h-full max-w-[calc(1410px+160px)] px-6 sm:px-12 lg:px-20 mx-auto flex items-center">
+          <div className="text-white max-w-[900px] flex flex-col lg:flex-row gap-y-4 lg:gap-x-[96px]">
+            <div className="flex-shrink-0">
+              <h2 className="text-[32px] sm:text-[40px] lg:text-[48px] mb-2">{zhWord}</h2>
+              <p className="text-[18px] sm:text-[20px] lg:text-[24px] text-gray-300">{currentRouteName}</p>
             </div>
-            <div className="w-[450px] max-lg:max-w-[450px] mt-[12px]">
-              <p className="text-[16px] tracking-[-0.5px]  text-gray-200">
+            <div className="w-full lg:w-[450px] mt-0 lg:mt-[12px]">
+              <p className="text-[14px] sm:text-[15px] lg:text-[16px] tracking-[-0.5px] text-gray-200 line-clamp-4 lg:line-clamp-none">
                 {desc}
               </p>
             </div>
@@ -116,12 +116,12 @@ export default function Neuroticism() {
       </section>
 
       {/* Content section */}
-      <section className="bg-white px-[255px] py-[80px]">
-        <div className="max-w-[810px] text-[24px] mb-[201px]">
-          <h3 className="text-[64px] mb-4">{levelStr}</h3>
+      <section className="bg-white px-6 sm:px-12 md:px-20 lg:px-[255px] py-[48px] sm:py-[64px] lg:py-[80px]">
+        <div className="max-w-[810px] text-[18px] sm:text-[20px] lg:text-[24px] mb-[80px] sm:mb-[140px] lg:mb-[201px]">
+          <h3 className="text-[40px] sm:text-[52px] lg:text-[64px] mb-4">{levelStr}</h3>
           {levelStr === "中" ? (
             <>
-              <p className=" text-gray-700 mb-8">
+              <p className="text-gray-700 mb-6 sm:mb-8">
                 你的{zhWord}介於
                 {levelStr === "高"
                   ? "高分與低分"
@@ -131,23 +131,23 @@ export default function Neuroticism() {
                 ，可參考高分與低分的說明。
               </p>
 
-              <div className="space-y-6 mb-12">
+              <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
                 <div>
-                  <h4 className="text-[20px] font-medium mb-3">高</h4>
-                  <p className="text-[16px] leading-[1.8] text-gray-600">
+                  <h4 className="text-[18px] sm:text-[20px] font-medium mb-2 sm:mb-3">高</h4>
+                  <p className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.8] text-gray-600">
                     {descData["high"] || "高分描述暫無資料"}
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-[20px] font-medium mb-3">低</h4>
-                  <p className="text-[16px] leading-[1.8] text-gray-600">
+                  <h4 className="text-[18px] sm:text-[20px] font-medium mb-2 sm:mb-3">低</h4>
+                  <p className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.8] text-gray-600">
                     {descData["low"] || "低分描述暫無資料"}
                   </p>
                 </div>
               </div>
             </>
           ) : (
-            <p className=" text-gray-700 mb-8 tracking-[-0.5px] ">{descData[level]}</p>
+            <p className="text-gray-700 mb-6 sm:mb-8 tracking-[-0.5px]">{descData[level]}</p>
           )}
 
         </div>
@@ -156,20 +156,19 @@ export default function Neuroticism() {
             {isLast ? (
               <Link
                 to="/start-test"
-                className="flex items-center gap-2 text-[#4F61FF] text-[20px] font-medium hover:text-[#3d4dd4] transition-colors"
+                className="flex items-center gap-2 text-[#4F61FF] text-[16px] sm:text-[18px] lg:text-[20px] font-medium hover:text-[#3d4dd4] transition-colors"
               >
                 <span>重新測驗</span>
-                <span className="material-icons text-[28px]">
+                <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
                   arrow_forward
                 </span>
               </Link>
             ) : (
               <Link
                 to={`/result/${nextRoute}`}
-                className="flex items-center gap-2 text-[32px]  hover:text-[#3d4dd4] transition-colors"
+                className="flex flex-wrap items-center gap-1 sm:gap-2 text-[20px] sm:text-[26px] lg:text-[32px] hover:text-[#3d4dd4] transition-colors"
               >
                 <span>下一個</span>
-
                 <span className="font-medium">：{nextTitle}</span>
                 <span
                   className="material-icons text-[#4F61FF] "
