@@ -132,6 +132,11 @@ export default function TestPage({ resData, setResult }) {
                 </h4>
               </div>
             </div>
+
+            <div className="absolute text-[#00000060] bottom-6 sm:bottom-8 lg:bottom-12 left-6 sm:left-12 lg:left-20 ">
+              <p className="font-bold text-[16px] mb-1">五大性格特質心理測驗</p>
+              <p className="text-[12px]">Big Five personality traits test</p>
+            </div>
           </div>
 
           {/* right */}
