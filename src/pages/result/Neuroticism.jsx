@@ -74,14 +74,17 @@ export default function Neuroticism() {
         {/* Navigation bar overlaying image */}
         <header className="relative z-10 text-white max-w-[calc(1410px+160px)] px-6 sm:px-12 lg:px-20 mx-auto py-4 sm:py-5 lg:py-6">
           <div className="flex items-center justify-between">
-            <div>
+
+            <Link to={`/`}
+              
+            >
               <h1 className="text-[16px] sm:text-[18px] lg:text-[20px] font-light mb-1">
                 五大性格特質心理測驗
               </h1>
               <p className="text-[10px] sm:text-[11px] lg:text-[12px] text-gray-400">
                 Big Five personality traits test
               </p>
-            </div>
+            </Link>
             <nav className="hidden lg:flex gap-4 xl:gap-6">
               {navItems.map((item) => (
                 <Link
