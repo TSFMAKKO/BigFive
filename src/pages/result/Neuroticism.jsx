@@ -169,17 +169,17 @@ export default function Neuroticism() {
           {isLast ? (
             <Link
               to="/start-test"
-              className="flex items-center gap-2 text-[#4F61FF] text-[16px] sm:text-[18px] lg:text-[20px] font-medium hover:text-[#3d4dd4] transition-colors"
+              className="flex items-center border py-[24px] px-[73px] gap-2  text-[24px] lg:text-[32px] font-medium hover:text-[#3d4dd4] transition-colors "
             >
               <span>重新測驗</span>
-              <span className="material-icons text-[24px] sm:text-[26px] lg:text-[28px]">
+              <span className="material-icons hover:text-[#4F61FF]" style={{ fontSize: '48px' }}>
                 arrow_forward
               </span>
             </Link>
           ) : (
             <Link
               to={`/result/${nextRoute}`}
-              className="flex flex-wrap items-center gap-1 sm:gap-2 text-[20px] sm:text-[26px] lg:text-[32px] hover:text-[#3d4dd4] transition-colors"
+              className="flex flex-wrap items-center gap-1 sm:gap-2 text-[20px] sm:text-[26px] lg:text-[32px] hover:text-[#3d4dd4] transition-colors py-3 sm:py-4"
             >
               <span>下一個</span>
               <span className="font-medium">：{nextTitle}</span>
