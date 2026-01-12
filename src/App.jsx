@@ -12,6 +12,13 @@ import Neuroticism from "./pages/result/Neuroticism.jsx";
 
 function App() {
   const [resData, setResData] = useState({});
+  const [result, setResult] = useState({
+    neuroticism: [],
+    extroversion: [],
+    openness: [],
+    agreeableness: [],
+    conscientiousness: [],
+  });
 
   useEffect(() => {
     async function fetchApi() {
@@ -31,9 +38,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/start-test" element={<StartTestPage />} />
-      <Route path="/test" element={<TestPage resData={resData} />} />
-      <Route path="/result" element={<ResultPage resData={resData} />}>
+      <Route path="/start-test" element={<StartTestPage resData={resData} />} />
+      <Route path="/test" element={<TestPage resData={resData} setResult={setResult} />} />
+      <Route path="/result" element={<ResultPage resData={resData} result={result} />}> 
         <Route index element={<Navigate to="openness" replace />} />
         <Route path="openness" element={<Neuroticism />} />
         <Route path="conscientiousness" element={<Neuroticism />} />
