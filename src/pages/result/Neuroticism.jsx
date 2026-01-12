@@ -49,7 +49,7 @@ export default function Neuroticism() {
     agreeableness: "親和性.avif",
     conscientiousness: "盡責性.avif",
   };
-  const imageSrc = `/imgs/${
+  const imageSrc = `${import.meta.env.BASE_URL}imgs/${
     imageMap[currentRouteName] || imageMap.neuroticism
   }`;
 

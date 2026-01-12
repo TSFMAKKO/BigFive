@@ -6,7 +6,7 @@ export default function StartTestPage({ resData }) {
       {/* Top image section */}
       <div className="h-[400px] md:h-[400px] sm:h-[300px] overflow-hidden">
         <img
-          src="/imgs/開始測驗.avif"
+          src={`${import.meta.env.BASE_URL}imgs/開始測驗.avif`}
           alt="開始測驗"
           className="w-full h-full object-cover"
         />
